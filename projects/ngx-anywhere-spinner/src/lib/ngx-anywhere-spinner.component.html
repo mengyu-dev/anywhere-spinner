@@ -1,6 +1,81 @@
 <div [ngSwitch]="options.type" [ngClass]="options.styleClass">
-  <div *ngSwitchCase="'circle'" class="lds-circle"><div></div></div>
-  <div *ngSwitchCase="'dual-ring'" class="lds-dual-ring"></div>
-  <div *ngSwitchCase="'facebook'" class="lds-facebook"><div></div><div></div><div></div></div>
-  <div class='as-message'>{{options.message}}</div>
+    <div *ngSwitchCase="'circle'" class="lds-circle">
+        <div></div>
+    </div>
+    <div *ngSwitchCase="'dual-ring'" class="lds-dual-ring"></div>
+    <div *ngSwitchCase="'facebook'" class="lds-facebook">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div *ngSwitchCase="'heart'" class="lds-heart">
+        <div></div>
+    </div>
+    <div *ngSwitchCase="'ring'" class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div *ngSwitchCase="'roller'" class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div *ngSwitchDefault class="lds-default">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div *ngSwitchCase="'ellipsis'" class="lds-ellipsis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div *ngSwitchCase="'grid'" class="lds-grid">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div *ngSwitchCase="'hourglass'" class="lds-hourglass"></div>
+    <div *ngSwitchCase="'ripple'" class="lds-ripple">
+        <div></div>
+        <div></div>
+    </div>
+    <div *ngSwitchCase="'spinner'" class="lds-spinner">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div class='as-message'>{{options.message}}</div>
 </div>
