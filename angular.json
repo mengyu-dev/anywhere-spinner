@@ -119,6 +119,41 @@
           }
         }
       }
+    },
+    "NgxAnywhereSpinner": {
+      "projectType": "library",
+      "root": "projects/ngx-anywhere-spinner",
+      "sourceRoot": "projects/ngx-anywhere-spinner/src",
+      "prefix": "NgxAnywhereSpinner",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-anywhere-spinner/tsconfig.lib.json",
+            "project": "projects/ngx-anywhere-spinner/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-anywhere-spinner/src/test.ts",
+            "tsConfig": "projects/ngx-anywhere-spinner/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-anywhere-spinner/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-anywhere-spinner/tsconfig.lib.json",
+              "projects/ngx-anywhere-spinner/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "defaultProject": "AnywhereSpinner"
 }

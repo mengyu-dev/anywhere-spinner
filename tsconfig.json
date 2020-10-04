@@ -18,6 +18,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-anywhere-spinner": [
+        "dist/ngx-anywhere-spinner"
+      ],
+      "ngx-anywhere-spinner/*": [
+        "dist/ngx-anywhere-spinner/*"
+      ]
+    }
   }
 }
