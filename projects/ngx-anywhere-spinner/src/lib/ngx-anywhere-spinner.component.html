@@ -1,0 +1,6 @@
+<div [ngSwitch]="options.type" [ngClass]="options.styleClass">
+  <div *ngSwitchCase="'circle'" class="lds-circle"><div></div></div>
+  <div *ngSwitchCase="'dual-ring'" class="lds-dual-ring"></div>
+  <div *ngSwitchCase="'facebook'" class="lds-facebook"><div></div><div></div><div></div></div>
+  <div class='as-message'>{{options.message}}</div>
+</div>

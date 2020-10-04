@@ -124,7 +124,7 @@
       "projectType": "library",
       "root": "projects/ngx-anywhere-spinner",
       "sourceRoot": "projects/ngx-anywhere-spinner/src",
-      "prefix": "NgxAnywhereSpinner",
+      "prefix": "Ngx-AS",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",

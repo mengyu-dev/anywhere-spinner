@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { interval, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'anywhere-spinner-root',
@@ -7,4 +9,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'AnywhereSpinner';
+  displayOverlay = [true,false]
+  options = {message:'data',type:'facebook',styleClass:"test"}
+
+  spinnerStatus$: Observable<boolean> = interval(2000).pipe(
+    map(i => {
+      debugger;
+      return this.displayOverlay[i%2]
+    })
+  );
 }

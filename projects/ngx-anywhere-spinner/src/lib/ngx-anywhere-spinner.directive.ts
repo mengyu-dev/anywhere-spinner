@@ -3,7 +3,7 @@ import { ComponentPortal, PortalInjector} from '@angular/cdk/portal';
 import { Directive, ElementRef, Injector, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DynamicOverlay } from './dynamic-overlay';
-import { SpinnerData, NgxAnywhereSpinnerComponent } from './ngx-anywhere-spinner.component';
+import { NgxAnywhereSpinnerComponent, SpinnerOptions } from './ngx-anywhere-spinner.component';
 
 @Directive({
   selector: '[anywhere-spinner]'
@@ -11,7 +11,7 @@ import { SpinnerData, NgxAnywhereSpinnerComponent } from './ngx-anywhere-spinner
 export class NgxAnywhereSpinnerDirective {
 
   @Input('anywhere-spinner-status') toggler: Observable<boolean>;
-  @Input() spinnerData: SpinnerData;
+  @Input('anywhere-spinner-options') spinnerOptions: SpinnerOptions;
 
   private overlayRef: OverlayRef;
 
@@ -28,7 +28,7 @@ export class NgxAnywhereSpinnerDirective {
 
     this.toggler.subscribe(show => {
       if (show) {
-        const injector = this.getInjector(this.spinnerData, this.parentInjector);
+        const injector = this.getInjector(this.spinnerOptions, this.parentInjector);
         const loaderPortal = new ComponentPortal(
           NgxAnywhereSpinnerComponent,
           null,
@@ -42,11 +42,9 @@ export class NgxAnywhereSpinnerDirective {
     });
   }
 
-  getInjector(data: SpinnerData, parentInjector: Injector): PortalInjector {
+  getInjector(options: SpinnerOptions, parentInjector: Injector): PortalInjector {
     const tokens = new WeakMap();
-
-    tokens.set(SpinnerData, data);
-
+    tokens.set(SpinnerOptions, options);
     return new PortalInjector(parentInjector, tokens);
   }
 
