@@ -18,4 +18,10 @@ export class AppComponent {
       return this.displayOverlay[i%2]
     })
   );
+
+  spinnerStatus: boolean = true;
+
+  constructor(){
+    window.setInterval(()=>{this.spinnerStatus = !this.spinnerStatus}, 5000);
+  }  
 }
