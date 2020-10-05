@@ -1,9 +1,16 @@
 {
-  "name": "ngx-anywhere-spinner",
-  "version": "0.0.1",
-  "peerDependencies": {
-    "@angular/common": "^8.0.3",
-    "@angular/core": "^8.0.3",
-    "@angular/cdk": "^8.0.3"
-  }
+    "name": "ngx-anywhere-spinner",
+    "version": "0.0.2",
+    "peerDependencies": {
+        "@angular/common": "^8.0.3",
+        "@angular/core": "^8.0.3",
+        "@angular/cdk": "^8.0.3"
+    },
+    "author": "Mengyu LIU",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:mengyu-dev/anywhere-spinner.git"
+    },
+    "keywords": ["angular", "loader", "overlay loader", "spinner", "overlay spinner"]
 }

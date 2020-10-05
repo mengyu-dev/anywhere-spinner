@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 export class AppComponent {
   title = 'AnywhereSpinner';
   displayOverlay = [true,false]
-  options = {message:'data loading',type:'ring',styleClass:"test"}
+  options = {message:'Chargement en cours', type:'ring'}
 
   spinnerStatus$: Observable<boolean> = interval(2000).pipe(
     map(i => {

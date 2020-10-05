@@ -2,9 +2,9 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 
 export class SpinnerOptions {
-  message: string
-  type:string
-  styleClass: any
+  message?: string
+  type?:string
+  styleClass?: any
 }
 
 @Component({

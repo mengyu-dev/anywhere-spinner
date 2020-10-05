@@ -9,9 +9,19 @@ import { NgxAnywhereSpinnerComponent, SpinnerOptions } from './ngx-anywhere-spin
   selector: '[anywhere-spinner]'
 })
 export class NgxAnywhereSpinnerDirective {
+   
+  private defaultOptions = {
+    message: 'Loading',
+    type: 'default',
+    styleClass: []
+  };
+  private _options : SpinnerOptions = this.defaultOptions;
 
   @Input('anywhere-spinner-status$') toggler$: Observable<boolean> = new Subject();
-  @Input('anywhere-spinner-options') spinnerOptions: SpinnerOptions;
+  @Input('anywhere-spinner-options') 
+  set spinnerOptions(options: SpinnerOptions){
+    if(options != null) this._options = {...this.defaultOptions, ...options};
+  };
   @Input('anywhere-spinner-status') 
   set toggle(status: boolean){
     this._toggler$.next(status);
@@ -35,7 +45,7 @@ export class NgxAnywhereSpinnerDirective {
 
   this.subscription = merge(this._toggler$,this.toggler$).subscribe(show => {
       if (show) {
-        const injector = this.getInjector(this.spinnerOptions, this.parentInjector);
+        const injector = this.getInjector(this._options, this.parentInjector);
         const loaderPortal = new ComponentPortal(
           NgxAnywhereSpinnerComponent,
           null,
