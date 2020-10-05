@@ -1,27 +1,68 @@
-# AnywhereSpinner
+# Put spinner anywhere in Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.3.
+## Do you need this library ?
 
-## Development server
+This library aims to improve user experience when data is loading in angular project.
+This library is different than [Angular Material Spinner](https://material.angular.io/components/progress-spinner/overview) or [Ng Primer Spinner](https://www.primefaces.org/primeng/v9.1.6-lts/#/progressspinner). This library uses angular cdk overlay to put the spinner over any content. This is done without adding / modifying HTML or CSS of the inner component, but by the non intrusive way. 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Usage
 
-## Code scaffolding
+Just put the directive `anywhere-spinner` in the html container tag and bind a status variable to control the spinner status.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+``` html
+<div anywhere-spinner [anywhere-spinner-status]="loading"></div>
+```
 
-## Build
+If want to put the spinner over a component,
+``` html
+<some-component anywhere-spinner [anywhere-spinner-status]="loading"></some-component>
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+In the above cases, loading is a variable,
+```typescript
+loading = false;
+//fetch data by http or some tasks
+loading = true;
+```
 
-## Running unit tests
+In some situations, we can also bind an observable variable to control the spinner status.
+``` html
+<div anywhere-spinner [anywhere-spinner-status$]="loading$"></div>
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## More Options
+`anywhere-spinner-options` is available to pass more options.
 
-## Running end-to-end tests
+``` html
+<div anywhere-spinner [anywhere-spinner-status]="loading" [anywhere-spinner-options]="options"></div>
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```typescript
+options = {
+    "message":"Waiting data from server",
+    "type":"ring"
+    }
+```
 
-## Further help
+### Spinner types
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Thanks for [Pure CSS Loaders](https://loading.io/css/) under CC0 License! This library integrates these 12 types spinners :
+
+- circle
+- dual-ring
+- facebook
+- heart 
+- ring
+- roller
+- default
+- ellipsis
+- grid
+- hourglass
+- ripple
+- spinner
+
+
+<img src="https://raw.githubusercontent.com/mengyu-dev/anywhere-spinner/main/projects/ngx-anywhere-spinner/spinner-types.png" width="300" height="300"> <img src="https://raw.githubusercontent.com/mengyu-dev/anywhere-spinner/main/projects/ngx-anywhere-spinner/spinner-types-1.png" width="300" height="300">
+
+## License
+ MIT, feel free !
