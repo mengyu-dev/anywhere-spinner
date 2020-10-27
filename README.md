@@ -20,9 +20,9 @@ If want to put the spinner over a component,
 
 In the above cases, loading is a variable,
 ```typescript
-loading = false;
-//fetch data by http or some tasks
 loading = true;
+//fetch data by http or some tasks
+loading = false;
 ```
 
 In some situations, we can also bind an observable variable to control the spinner status.
