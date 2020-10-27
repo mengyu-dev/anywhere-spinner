@@ -4,6 +4,7 @@ import {Directive, ElementRef, Injector, Input} from '@angular/core';
 import {merge, Observable, Subject, Subscription} from 'rxjs';
 import {DynamicOverlay} from './dynamic-overlay';
 import {NgxAnywhereSpinnerComponent, SpinnerOptions} from './ngx-anywhere-spinner.component';
+import {delay} from "rxjs/operators";
 
 @Directive({
   selector: '[anywhere-spinner]'
@@ -42,7 +43,7 @@ export class NgxAnywhereSpinnerDirective {
     this.overlayRef = this.dynamicOverlay.createWithDefaultConfig(
       this.host.nativeElement
     );
-    this.subscription = merge(this._toggler$, this.toggler$).subscribe(show => {
+    this.subscription = merge(this._toggler$, this.toggler$).pipe(delay(100)).subscribe(show => {
       if (show) {
         const injector = this.getInjector(this._options, this.parentInjector);
         const loaderPortal = new ComponentPortal(
