@@ -1,24 +1,25 @@
-<div [ngSwitch]="options.type" class="as-basic" [ngClass]="options.styleClass">
-    <div *ngSwitchCase="'circle'" class="lds-circle">
-        <div></div>
-    </div>
-    <div *ngSwitchCase="'dual-ring'" class="lds-dual-ring"></div>
-    <div *ngSwitchCase="'facebook'" class="lds-facebook">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-    <div *ngSwitchCase="'heart'" class="lds-heart">
-        <div></div>
-    </div>
-    <div *ngSwitchCase="'ring'" class="lds-ring">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-    <div *ngSwitchCase="'roller'" class="lds-roller">
-        <div></div>
+<div [ngSwitch]="options.type || defaultOptions.type" class="as-basic"
+     [ngClass]="options.styleClass || defaultOptions.styleClass">
+  <div *ngSwitchCase="'circle'" class="lds-circle">
+    <div></div>
+  </div>
+  <div *ngSwitchCase="'dual-ring'" class="lds-dual-ring"></div>
+  <div *ngSwitchCase="'facebook'" class="lds-facebook">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <div *ngSwitchCase="'heart'" class="lds-heart">
+    <div></div>
+  </div>
+  <div *ngSwitchCase="'ring'" class="lds-ring">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <div *ngSwitchCase="'roller'" class="lds-roller">
+    <div></div>
         <div></div>
         <div></div>
         <div></div>
@@ -77,5 +78,5 @@
         <div></div>
         <div></div>
     </div>
-    <div class='as-message'>{{options.message}}</div>
+  <div class='as-message'>{{options.message || defaultOptions.message}}</div>
 </div>

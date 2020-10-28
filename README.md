@@ -30,6 +30,21 @@ In some situations, we can also bind an observable variable to control the spinn
 <div anywhere-spinner [anywhere-spinner-status$]="loading$"></div>
 ```
 
+## Overlay CSS file
+As Angular cdk overlay is used, please import overlay css file.
+
+Import file in styles file, `@import '~@angular/cdk/overlay-prebuilt.css';`
+
+or add file in angular.json,
+```JSON
+ "styles" : [
+              ...,
+              'node_modules/@angular/cdk/overlay-prebuilt.css'
+            ]
+```
+
+But if Angular Material theme CSS file is already imported in project, nothing is required.
+
 ## More Options
 `anywhere-spinner-options` is available to pass more options.
 

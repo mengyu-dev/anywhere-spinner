@@ -1,39 +1,36 @@
 import {OverlayRef} from '@angular/cdk/overlay';
 import {ComponentPortal, PortalInjector} from '@angular/cdk/portal';
 import {Directive, ElementRef, Injector, Input} from '@angular/core';
-import {merge, Observable, Subject, Subscription} from 'rxjs';
+import {Observable, ReplaySubject, Subscription} from 'rxjs';
 import {DynamicOverlay} from './dynamic-overlay';
 import {NgxAnywhereSpinnerComponent, SpinnerOptions} from './ngx-anywhere-spinner.component';
-import {delay} from "rxjs/operators";
 
 @Directive({
   selector: '[anywhere-spinner]'
 })
 export class NgxAnywhereSpinnerDirective {
+  _subscription?: Subscription;
 
-  private defaultOptions = {
-    message: 'Loading',
-    type: 'default',
-    styleClass: []
-  };
-  private _options : SpinnerOptions = this.defaultOptions;
-
-  @Input('anywhere-spinner-status$') toggler$: Observable<boolean> = new Subject();
+  @Input('anywhere-spinner-status$')
+  set toggle$(status$: Observable<boolean>) {
+    if (this._subscription) {
+      this._subscription.unsubscribe();
+    }
+    this._subscription = status$.subscribe(this._toggler$)
+  }
 
   @Input('anywhere-spinner-options')
-  set spinnerOptions(options: SpinnerOptions){
-    if(options != null) this._options = {...this.defaultOptions, ...options};
-  };
+  options: SpinnerOptions
 
   @Input('anywhere-spinner-status')
-  set toggle(status: boolean){
+  set toggle(status: boolean) {
     this._toggler$.next(status);
   }
 
-  private _toggler$: Subject<boolean> = new Subject();
+  private _toggler$: ReplaySubject<boolean> = new ReplaySubject();
   private subscription: Subscription;
-
   private overlayRef: OverlayRef;
+  private instance?: NgxAnywhereSpinnerComponent;
 
   constructor(
     private host: ElementRef,
@@ -43,18 +40,20 @@ export class NgxAnywhereSpinnerDirective {
     this.overlayRef = this.dynamicOverlay.createWithDefaultConfig(
       this.host.nativeElement
     );
-    this.subscription = merge(this._toggler$, this.toggler$).pipe(delay(100)).subscribe(show => {
+    this.subscription = this._toggler$.subscribe(show => {
       if (show) {
-        const injector = this.getInjector(this._options, this.parentInjector);
+        const injector = this.getInjector(this.parentInjector);
         const loaderPortal = new ComponentPortal(
           NgxAnywhereSpinnerComponent,
           null,
           injector
         );
 
-        this.overlayRef.attach(loaderPortal);
+        this.instance = this.overlayRef.attach(loaderPortal).instance;
+        this.instance.options = this.options;
       } else {
         this.overlayRef.detach();
+        this.instance = null;
       }
     });
   }
@@ -62,11 +61,10 @@ export class NgxAnywhereSpinnerDirective {
   ngOnDestroy() {
     console.debug("ngOnDestroy - NgxAnywhereSpinnerDirective");
     this.subscription.unsubscribe();
-}
+  }
 
-  getInjector(options: SpinnerOptions, parentInjector: Injector): PortalInjector {
+  getInjector(parentInjector: Injector): PortalInjector {
     const tokens = new WeakMap();
-    tokens.set(SpinnerOptions, options);
     return new PortalInjector(parentInjector, tokens);
   }
 

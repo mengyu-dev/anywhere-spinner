@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import { interval, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {Component} from '@angular/core';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'anywhere-spinner-root',
@@ -9,19 +8,22 @@ import { map } from 'rxjs/operators';
 })
 export class AppComponent {
   title = 'AnywhereSpinner';
-  displayOverlay = [true,false]
-  options = {message:'Chargement en cours', type:'ring'}
+  displayOverlay = [true, false]
+  options = {message: 'Chargement en cours', type: 'ring'}
 
-  spinnerStatus$: Observable<boolean> = interval(2000).pipe(
-    map(i => {
-      debugger;
-      return this.displayOverlay[i%2]
-    })
-  );
+  spinnerStatus$: Subject<boolean> = new Subject();
 
-  spinnerStatus: boolean = true;
+  constructor() {
+    let i = 0;
+    window.setInterval(() => {
+        i++;
+        this.spinnerStatus$.next(this.displayOverlay[i % 2])
+      },
+      2000);
 
-  constructor(){
-    window.setInterval(()=>{this.spinnerStatus = !this.spinnerStatus}, 5000);
-  }  
+    window.setInterval(() => {
+        this.options.message = new Date().toISOString();
+      },
+      100);
+  }
 }

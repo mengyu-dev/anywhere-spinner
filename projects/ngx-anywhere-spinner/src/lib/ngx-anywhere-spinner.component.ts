@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 
 export class SpinnerOptions {
@@ -14,7 +14,17 @@ export class SpinnerOptions {
 })
 export class NgxAnywhereSpinnerComponent implements OnInit {
 
-  constructor(public readonly options: SpinnerOptions) { }
+  defaultOptions = {
+    message: 'Loading',
+    type: 'default',
+    styleClass: []
+  };
+
+  @Input()
+  public options: SpinnerOptions;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
